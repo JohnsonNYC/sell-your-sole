@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 //Components
 import ItemsList from "../components/ItemsList";
@@ -8,18 +8,15 @@ import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext
 
 const UnifiedCheckout = () => {
   const { isOpen, setIsOpen } = useContext(UnifiedCheckoutContext);
-  const [showAnimation, setShowAnimation] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
 
   const handleClose = () => {
     setShowAnimation(false);
     setTimeout(() => {
       setIsOpen(false);
-    }, 1000);
+      setShowAnimation(true);
+    }, 900);
   };
-
-  useEffect(() => {
-    if (isOpen) setShowAnimation(true);
-  }, []);
 
   return (
     <Container isOpen={isOpen}>
