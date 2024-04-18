@@ -23,6 +23,5 @@ export default ItemsList;
 const Wrapper = styled.div`
   width: 70%;
   padding: 10px;
-  border: 1px solid red;
   overflow-y: auto;
 `;

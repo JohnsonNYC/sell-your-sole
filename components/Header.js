@@ -9,7 +9,7 @@ import { UnifiedCheckoutProvider } from "../components/Context/UnifiedCheckoutCo
 import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext";
 
 const Header = () => {
-  const { isOpen, setIsOpen } = useContext(UnifiedCheckoutContext);
+  const { setIsOpen } = useContext(UnifiedCheckoutContext);
 
   return (
     <UnifiedCheckoutProvider>
