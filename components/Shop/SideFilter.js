@@ -27,8 +27,6 @@ const shoeOptions = [
 const sizeOptions = [{ text: "3" }, { text: 3.5 }];
 
 const SideFilter = () => {
-  const windowSize = useMediaPredicate();
-
   return (
     <Wrapper>
       <Toggle label={"Pick Up Today"} />
@@ -68,7 +66,6 @@ const FilterContainer = styled.div`
 `;
 
 const Wrapper = styled.div`
-  border: 1px solid red;
   max-width: 192px;
   width: 100%;
   height: 100%;
@@ -81,5 +78,9 @@ const Wrapper = styled.div`
 
   & > div:first-of-type {
     margin-bottom: 10px;
+  }
+
+  @media screen and (max-width: 930px) {
+    display: none;
   }
 `;

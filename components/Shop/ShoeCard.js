@@ -20,11 +20,15 @@ const ShoeCard = () => {
 export default ShoeCard;
 const PlaceholderImage = styled.div`
   width: 100%;
-  height: 343px;
+  height: 70%;
   background: black;
 `;
 const Wrapper = styled.div`
-  border: 1px solid black;
   max-width: 343px;
   width: 100%;
+  height: 500px;
+
+  @media screen and (max-width: 700px) {
+    height: 390px;
+  }
 `;
