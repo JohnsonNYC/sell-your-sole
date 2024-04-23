@@ -16,16 +16,16 @@ const ItemRow = () => {
 
           <IconContainer>
             <Button
-              backgroundColor="#E75480"
-              fontColor="white"
-              borderColor={"#E75480"}
+              backgroundcolor="#E75480"
+              fontcolor="white"
+              bordercolor={"#E75480"}
             >
               Favorite
             </Button>
             <Button
-              backgroundColor="white"
-              fontColor="black"
-              borderColor={"gray"}
+              backgroundcolor="white"
+              fontcolor="black"
+              bordercolor={"gray"}
             >
               Delete
             </Button>
@@ -76,9 +76,9 @@ const Button = styled.button`
   border-radius: 20px;
   padding: 2px 10px;
 
-  border: 1px solid ${(props) => props.borderColor};
-  background: ${(props) => props.backgroundColor};
-  color: ${(props) => props.fontColor};
+  border: 1px solid ${(props) => props.bordercolor};
+  background: ${(props) => props.backgroundcolor};
+  color: ${(props) => props.fontcolor};
   cursor: pointer;
 `;
 const IconContainer = styled.div`

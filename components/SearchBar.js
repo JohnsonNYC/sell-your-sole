@@ -26,7 +26,8 @@ export default SearchBar;
 
 const Form = styled.form`
   display: flex;
-  width: 250px;
+  max-width: 250px;
+  width: 100%;
   border: 1px solid #faf9f6;
   border-radius: 6px;
   background: white;

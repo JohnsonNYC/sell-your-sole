@@ -5,7 +5,7 @@ const Button = ({ children, color }) => {
   const fontColor = color == "black" ? "white" : "black";
 
   return (
-    <StyledButton backgroundColor={color} fontColor={fontColor}>
+    <StyledButton backgroundcolor={color} fontColor={fontColor}>
       {children}
     </StyledButton>
   );
@@ -15,7 +15,7 @@ export default Button;
 
 const StyledButton = styled.button`
   padding: 16px 24px;
-  background: ${(props) => props.backgroundColor || "white"};
+  background: ${(props) => props.backgroundcolor || "white"};
   color: ${(props) => props.fontColor};
   border-radius: 50px;
   font-family: "Roboto";

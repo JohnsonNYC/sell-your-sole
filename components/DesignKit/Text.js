@@ -8,7 +8,12 @@ const StyledDiv = styled.div`
   color: ${(props) => props.color};
 `;
 
-const colorMap = { "dark-black": "#28282B", black: "#36454f", white: "#fff" };
+const colorMap = {
+  "dark-black": "#28282B",
+  black: "#36454f",
+  white: "#fff",
+  "dark-orange": "#9E3500",
+};
 const textMap = { bebas: "Bebas Neue", roboto: "Roboto" };
 const weightMap = { regular: 400, medium: "500", semibold: "600", bold: "700" };
 const sizeMap = {
@@ -40,7 +45,7 @@ const Text = ({
       weight={defaultWeight}
       size={defaultSize}
       color={defaultColor}
-      className={className}
+      className={`sk-typography ${className}`}
       onClick={handleClick}
     >
       {children}
