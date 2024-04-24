@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Search } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const BurgerMenu = () => {
   return (
     <Wrapper>
-      <Search color={"white"} />
+      <Menu color={"white"} />
     </Wrapper>
   );
 };

@@ -24,7 +24,6 @@ const PlaceholderImage = styled.div`
   background: black;
 `;
 const Wrapper = styled.div`
-  max-width: 343px;
   width: 100%;
   height: 500px;
 

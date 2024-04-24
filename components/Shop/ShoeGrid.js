@@ -20,6 +20,7 @@ export default ShoeGrid;
 const GridContainer = styled.div`
   width: 100%;
   margin-top: 30px;
+  padding: 0 5px;
 
   display: grid;
   grid-template-columns: repeat(3, 33%);
@@ -27,5 +28,9 @@ const GridContainer = styled.div`
 
   @media screen and (max-width: 1025px) {
     grid-template-columns: repeat(2, 50%);
+  }
+
+  & > div {
+    margin: 0 auto;
   }
 `;

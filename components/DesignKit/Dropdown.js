@@ -15,8 +15,8 @@ const Dropdown = ({ label, options }) => {
 
       {options && options.length ? (
         <OptionsContainer className={`${isOpen ? "open" : ""}`}>
-          {options.map((opt) => (
-            <OptionsRow option={opt} />
+          {options.map((opt, i) => (
+            <OptionsRow key={opt.key || i} option={opt} />
           ))}
         </OptionsContainer>
       ) : null}
