@@ -5,6 +5,8 @@ import SearchBar from "./SearchBar";
 import styled from "styled-components";
 import Text from "./DesignKit/Text";
 import { useMediaPredicate } from "../hooks/hooks";
+import { useRouter } from "next/router";
+
 // Context
 import { UnifiedCheckoutProvider } from "../components/Context/UnifiedCheckoutContext";
 import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext";
@@ -13,16 +15,36 @@ import BurgerMenu from "./Home/BurgerMenu";
 const Header = () => {
   const { setIsOpen } = useContext(UnifiedCheckoutContext);
   let isMobile = useMediaPredicate() < 900;
+  const router = useRouter();
+
+  const handleGoShop = () => {
+    router.push("/shop");
+  };
+
+  const handleGoHome = () => {
+    router.push("/");
+  };
 
   return (
     <UnifiedCheckoutProvider>
       <HeaderContainer>
         {isMobile ? null : (
           <LeftContainer>
-            <Text font="bebas" size="xl" weight="bold" color="white">
+            <Text
+              font="bebas"
+              size="xl"
+              weight="bold"
+              color="white"
+              handleClick={handleGoHome}
+            >
               SYS
             </Text>
-            <Text font="bebas" size="lg" color="white">
+            <Text
+              font="bebas"
+              size="lg"
+              color="white"
+              handleClick={handleGoShop}
+            >
               Shop
             </Text>
             <Text font="bebas" size="lg" color="white">
