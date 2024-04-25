@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Text from "../DesignKit/Text";
 
-const ShoeCard = () => {
+const ShoeCard = ({ shoeData, setSelectedShoeData }) => {
+
   return (
-    <Wrapper>
+    <Wrapper onClick={() => setSelectedShoeData(shoeData)}>
       <PlaceholderImage />
       <Text font="roboto" weight="semibold" color="dark-orange">
         Just In
@@ -26,6 +27,7 @@ const PlaceholderImage = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: 500px;
+  cursor: pointer;
 
   @media screen and (max-width: 700px) {
     height: 390px;

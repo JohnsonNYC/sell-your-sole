@@ -2,15 +2,127 @@ import React from "react";
 import styled from "styled-components";
 import ShoeCard from "./ShoeCard";
 
-const ShoeGrid = () => {
+const seedData = [
+  {
+    key: crypto.randomUUID(),
+    title: "Shoe A",
+    sizes: ["8.0", "8.5", "9.0"],
+    price: "100.00",
+    styleId: crypto.randomUUID(),
+    color: ["Blanc Optique"],
+    material: "Leather",
+    details: [
+      "10 High Top Sneaker",
+      "Leather Upper",
+      "Perforated and smooth leather panels",
+      "Saint Laurent and SL/10H-debossed padded ankle",
+      "SL/10H debossed at side",
+      "Leather lining",
+      "Leather Sole",
+    ],
+  },
+  {
+    key: crypto.randomUUID(),
+    title: "Shoe B",
+    sizes: ["8.0", "8.5", "9.0"],
+    price: "100.00",
+    styleId: crypto.randomUUID(),
+    color: ["Blanc Optique"],
+    material: "Leather",
+    details: [
+      "10 High Top Sneaker",
+      "Leather Upper",
+      "Perforated and smooth leather panels",
+      "Saint Laurent and SL/10H-debossed padded ankle",
+      "SL/10H debossed at side",
+      "Leather lining",
+      "Leather Sole",
+    ],
+  },
+  {
+    key: crypto.randomUUID(),
+    title: "Shoe C",
+    sizes: ["8.0", "8.5", "9.0"],
+    price: "100.00",
+    styleId: crypto.randomUUID(),
+    color: ["Blanc Optique"],
+    material: "Leather",
+    details: [
+      "10 High Top Sneaker",
+      "Leather Upper",
+      "Perforated and smooth leather panels",
+      "Saint Laurent and SL/10H-debossed padded ankle",
+      "SL/10H debossed at side",
+      "Leather lining",
+      "Leather Sole",
+    ],
+  },
+  {
+    key: crypto.randomUUID(),
+    title: "Shoe D",
+    sizes: ["8.0", "8.5", "9.0"],
+    price: "100.00",
+    styleId: crypto.randomUUID(),
+    color: ["Blanc Optique"],
+    material: "Leather",
+    details: [
+      "10 High Top Sneaker",
+      "Leather Upper",
+      "Perforated and smooth leather panels",
+      "Saint Laurent and SL/10H-debossed padded ankle",
+      "SL/10H debossed at side",
+      "Leather lining",
+      "Leather Sole",
+    ],
+  },
+  {
+    key: crypto.randomUUID(),
+    title: "Shoe E",
+    sizes: ["8.0", "8.5", "9.0"],
+    price: "100.00",
+    styleId: crypto.randomUUID(),
+    color: ["Blanc Optique"],
+    material: "Leather",
+    details: [
+      "10 High Top Sneaker",
+      "Leather Upper",
+      "Perforated and smooth leather panels",
+      "Saint Laurent and SL/10H-debossed padded ankle",
+      "SL/10H debossed at side",
+      "Leather lining",
+      "Leather Sole",
+    ],
+  },
+  {
+    key: crypto.randomUUID(),
+    title: "Shoe F",
+    sizes: ["8.0", "8.5", "9.0"],
+    price: "100.00",
+    styleId: crypto.randomUUID(),
+    color: ["Blanc Optique"],
+    material: "Leather",
+    details: [
+      "10 High Top Sneaker",
+      "Leather Upper",
+      "Perforated and smooth leather panels",
+      "Saint Laurent and SL/10H-debossed padded ankle",
+      "SL/10H debossed at side",
+      "Leather lining",
+      "Leather Sole",
+    ],
+  },
+];
+
+const ShoeGrid = ({ setSelectedShoeData }) => {
   return (
     <GridContainer>
-      <ShoeCard />
-      <ShoeCard />
-      <ShoeCard />
-      <ShoeCard />
-      <ShoeCard />
-      <ShoeCard />
+      {seedData.map((el) => (
+        <ShoeCard
+          key={el.key}
+          shoeData={el}
+          setSelectedShoeData={setSelectedShoeData}
+        />
+      ))}
     </GridContainer>
   );
 };
