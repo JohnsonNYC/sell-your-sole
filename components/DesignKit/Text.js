@@ -6,6 +6,7 @@ const StyledDiv = styled.div`
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.weight};
   color: ${(props) => props.color};
+  cursor: ${(props) => (props.showPointer ? "pointer" : "initial")};
 `;
 
 const colorMap = {
@@ -15,7 +16,12 @@ const colorMap = {
   "dark-orange": "#9E3500",
 };
 const textMap = { bebas: "Bebas Neue", roboto: "Roboto" };
-const weightMap = { regular: 400, medium: "500", semibold: "600", bold: "700" };
+const weightMap = {
+  regular: "400",
+  medium: "500",
+  semibold: "600",
+  bold: "700",
+};
 const sizeMap = {
   xxs: "12px",
   xs: "14px",
@@ -33,6 +39,7 @@ const Text = ({
   size = "sm",
   color = "black",
   handleClick = null,
+  showPointer = false,
 }) => {
   const defaultColor = colorMap[color];
   const defaultSize = sizeMap[size];
@@ -47,6 +54,7 @@ const Text = ({
       color={defaultColor}
       className={`sk-typography ${className}`}
       onClick={handleClick}
+      showPointer={showPointer}
     >
       {children}
     </StyledDiv>
