@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Text from "../DesignKit/Text";
+import UnifiedCheckoutContext from "../Context/UnifiedCheckoutContext";
 
 const ShoeDetails = ({ selectedShoeData }) => {
+  const { cartData, setCartData, setIsOpen } = useContext(
+    UnifiedCheckoutContext
+  );
   const { title, sizes, styledId, price, material, details, color } =
     selectedShoeData || {};
+
+  const addToCart = () => {
+    let newData = [...cartData];
+    newData.push(selectedShoeData);
+    setCartData(newData);
+  };
 
   return (
     <Wrapper>
@@ -19,7 +29,7 @@ const ShoeDetails = ({ selectedShoeData }) => {
           </Text>
         ) : null}
 
-        <Button>$100.00 / ADD TO CART</Button>
+        <Button onClick={addToCart}>$100.00 / ADD TO CART</Button>
 
         {details && details.length ? (
           <ListContainer>
@@ -66,6 +76,7 @@ const Button = styled.button`
   &:hover {
     border: 1px solid #8373dc;
     background: #8373dc;
+    cursor: pointer;
   }
 `;
 

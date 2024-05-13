@@ -36,7 +36,7 @@ const ContentDrawer = ({ children, depVar, setDepVar }) => {
   return showDrawer ? (
     <Container>
       <DrawerContainer ref={drawerRef} height={height}>
-        <X onClick={() => setDepVar(null)} />
+        <X onClick={() => setDepVar(null)} style={{ cursor: "pointer" }} />
         {children}
       </DrawerContainer>
     </Container>

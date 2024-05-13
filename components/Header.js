@@ -13,9 +13,11 @@ import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext
 import BurgerMenu from "./Home/BurgerMenu";
 
 const Header = () => {
-  const { setIsOpen } = useContext(UnifiedCheckoutContext);
+  const { cartData, setIsOpen } = useContext(UnifiedCheckoutContext);
   let isMobile = useMediaPredicate() < 900;
   const router = useRouter();
+
+  const cartCount = cartData.length || 0;
 
   const handleGoShop = () => {
     router.push("/shop");
@@ -66,14 +68,19 @@ const Header = () => {
               Login
             </Text>
 
-            <Text
+            <RelaventText
               font="bebas"
               size="lg"
               color="white"
               handleClick={() => setIsOpen(true)}
             >
               Cart
-            </Text>
+              {cartCount > 0 ? (
+                <Indicator font="bebas" size="sm" color="blue">
+                  {cartCount}
+                </Indicator>
+              ) : null}
+            </RelaventText>
           </RightContainer>
         )}
 
@@ -84,6 +91,23 @@ const Header = () => {
 };
 
 export default Header;
+
+const Indicator = styled(Text)`
+  width: 20px;
+  height: 20px;
+  background: #8373dc;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  top: -22px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+`;
+
+const RelaventText = styled(Text)`
+  position: relative;
+`;
 
 const HeaderContainer = styled.header`
   background: #0a0a0a;

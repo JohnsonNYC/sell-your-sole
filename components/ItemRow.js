@@ -3,13 +3,22 @@ import styled from "styled-components";
 
 import Text from "./DesignKit/Text";
 
-const ItemRow = () => {
+const ItemRow = ({ item, cartData, setCartData }) => {
+  const { key, title, price } = item || {};
+
+  const removeItem = () => {
+    const cartCopy = [...cartData];
+    const foundItemIndex = cartCopy.findIndex((item) => item.key === key);
+    cartCopy.splice(foundItemIndex, 1);
+    setCartData(cartCopy);
+  };
+
   return (
     <Container>
       <Row>
         <PH />
         <Details>
-          <Text font="roboto">Nike Trail Aireez</Text>
+          <Text font="roboto">{title}</Text>
           <Text font="roboto" size="xs">
             Men's Running Vest
           </Text>
@@ -26,13 +35,14 @@ const ItemRow = () => {
               backgroundcolor="white"
               fontcolor="black"
               bordercolor={"gray"}
+              onClick={removeItem}
             >
               Delete
             </Button>
           </IconContainer>
         </Details>
         <Price font="roboto" size="md">
-          $100.00
+          ${price}
         </Price>
       </Row>
 

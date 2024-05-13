@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 //Components
+import Text from "../components/DesignKit/Text";
 import ItemsList from "../components/ItemsList";
 import CheckoutSummary from "../components/CheckoutSummary";
 //State
 import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext";
 
 const UnifiedCheckout = () => {
-  const { isOpen, setIsOpen } = useContext(UnifiedCheckoutContext);
+  const { isOpen, setIsOpen, cartData, setCartData } = useContext(
+    UnifiedCheckoutContext
+  );
   const [showAnimation, setShowAnimation] = useState(true);
 
   const handleClose = () => {
@@ -26,8 +29,8 @@ const UnifiedCheckout = () => {
         }`}
       >
         <Button onClick={handleClose}>X</Button>
-        <ItemsList />
-        <CheckoutSummary />
+        <ItemsList cartData={cartData} setCartData={setCartData} />
+        <CheckoutSummary cartData={cartData} />
       </Wrapper>
     </Container>
   );
@@ -35,6 +38,13 @@ const UnifiedCheckout = () => {
 
 export default UnifiedCheckout;
 
+const EmptyMessage = () => {
+  return (
+    <div>
+      <Text>Looks like you don't have anything in your cart!</Text>
+    </div>
+  );
+};
 const Button = styled.button`
   background: unset;
   border: unset;

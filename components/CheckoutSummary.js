@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 
 //Components
 import Text from "./DesignKit/Text";
 import Button from "./DesignKit/Button";
 
-const CheckoutSummary = () => {
+const CheckoutSummary = ({ cartData }) => {
+  const cartTotal = useMemo(() => {
+    return cartData.reduce((acc, curr) => {
+      acc += parseInt(curr.price);
+      return acc;
+    }, 0);
+  }, [cartData]);
+
+  const shippingAndHandling = cartTotal ? 8 : 0;
+  const estimatedTax = cartTotal ? 4 : 0;
+  const total = cartTotal + shippingAndHandling + estimatedTax;
+
   return (
     <Wrapper>
       <Text font="roboto" weight="bold" size="lg">
@@ -16,31 +27,33 @@ const CheckoutSummary = () => {
 
       <Row>
         <Text font="roboto">Subtotal</Text>
-        <Text font="roboto">$380.00</Text>
+        <Text font="roboto">${cartTotal}</Text>
       </Row>
 
       <Row>
         <Text font="roboto">Estimated Shipping & Handling</Text>
-        <Text font="roboto">$8.00</Text>
+        <Text font="roboto">${shippingAndHandling}</Text>
       </Row>
 
       <Row>
         <Text font="roboto">Estimated Tax</Text>
-        <Text font="roboto">$8.00</Text>
+        <Text font="roboto">${estimatedTax}</Text>
       </Row>
 
       <Break />
 
       <Row>
         <Text font="roboto">Total</Text>
-        <Text font="roboto">$388.00</Text>
+        <Text font="roboto">${total}</Text>
       </Row>
 
       <Break />
 
       <ButtonContainer>
-        <Button color="black">Checkout</Button>
-        <Button>Paypal</Button>
+        <Button color="black" disabled={Boolean(total == 0)}>
+          Checkout
+        </Button>
+        <Button disabled={Boolean(total == 0)}>Paypal</Button>
       </ButtonContainer>
     </Wrapper>
   );
