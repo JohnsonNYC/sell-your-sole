@@ -22,6 +22,7 @@ const StyledButton = styled.button`
   border-radius: 50px;
   font-family: "Roboto";
   font-size: 16px;
+  cursor: pointer;
 
   &:disabled {
     opacity: 0.33;

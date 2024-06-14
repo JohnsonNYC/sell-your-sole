@@ -3,7 +3,9 @@ import styled from "styled-components";
 //Components
 import Text from "../components/DesignKit/Text";
 import ItemsList from "../components/ItemsList";
-import CheckoutSummary from "../components/CheckoutSummary";
+import CheckoutSummary from "../components/Checkout/CheckoutSummary";
+import ShippingForm from "../components/Checkout/ShippingForm";
+
 //State
 import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext";
 
@@ -11,26 +13,50 @@ const UnifiedCheckout = () => {
   const { isOpen, setIsOpen, cartData, setCartData } = useContext(
     UnifiedCheckoutContext
   );
+
+  const [activeTab, setActiveTab] = useState(0); // 0: review, 1: shipping details, 2: succes page?
   const [showAnimation, setShowAnimation] = useState(true);
 
   const handleClose = () => {
     setShowAnimation(false);
     setTimeout(() => {
-      setIsOpen(false);
-      setShowAnimation(true);
+      resetState();
     }, 900);
   };
 
+  const resetState = () => {
+    setIsOpen(false);
+    setShowAnimation(true);
+    setActiveTab(0);
+  };
+
   return (
-    <Container isOpen={isOpen}>
+    <Container isopen={isOpen}>
       <Wrapper
         className={`animate__animated ${
           showAnimation ? "animate__fadeInRight" : "animate__fadeOutRight"
         }`}
       >
         <Button onClick={handleClose}>X</Button>
-        <ItemsList cartData={cartData} setCartData={setCartData} />
-        <CheckoutSummary cartData={cartData} />
+        {activeTab == 0 ? (
+          <>
+            <ItemsList cartData={cartData} setCartData={setCartData} />
+            <CheckoutSummary
+              cartData={cartData}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          </>
+        ) : activeTab == 1 ? (
+          <>
+            <ShippingForm />
+            <CheckoutSummary
+              cartData={cartData}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          </>
+        ) : null}
       </Wrapper>
     </Container>
   );
@@ -65,7 +91,7 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
 
-  display: ${(props) => (props.isOpen ? "inline" : "none")};
+  display: ${(props) => (Boolean(props.isopen) ? "inline" : "none")};
 
   .animate__animated {
     animation-fill-mode: none;

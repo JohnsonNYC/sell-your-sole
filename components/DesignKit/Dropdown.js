@@ -28,9 +28,14 @@ const OptionsRow = ({ option }) => {
   const { text } = option || {};
   const [isToggled, setIsToggled] = useState(false);
 
+  const updateToggle = (e) => {
+    e.stopPropagation();
+    setIsToggled(!isToggled);
+  };
+
   return (
-    <OptionRowWrapper onClick={() => setIsToggled(!isToggled)}>
-      <input type="checkbox" checked={isToggled} />
+    <OptionRowWrapper onClick={updateToggle}>
+      <input type="checkbox" checked={isToggled} onChange={updateToggle} />
       <Text font="roboto">{text}</Text>
     </OptionRowWrapper>
   );
@@ -53,6 +58,7 @@ const LabelContainer = styled.div`
 const OptionRowWrapper = styled.div`
   display: flex;
   padding: 5px;
+  border: 1px solid red;
 `;
 
 const Wrapper = styled.div`

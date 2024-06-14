@@ -92,7 +92,12 @@ const CheckoutContainer = () => {
           </SplitContainer>
         </form>
 
-        <Text font="roboto" size="xs" handleClick={goBackToShop} showPointer>
+        <Text
+          font="roboto"
+          size="xs"
+          handleClick={goBackToShop}
+          showPointer={true}
+        >
           {"> return to shop"}
         </Text>
       </Container>

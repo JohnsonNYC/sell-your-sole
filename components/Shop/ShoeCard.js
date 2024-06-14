@@ -5,11 +5,19 @@ import Image from "next/image";
 
 const ShoeCard = ({ shoeData, setSelectedShoeData }) => {
   const { title, price, imageUrl } = shoeData || {};
+
   return (
     <Wrapper onClick={() => setSelectedShoeData(shoeData)}>
       <ImageContainer>
         {imageUrl ? (
-          <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill={true}
+            sizes={"(max-width: 300px) 100%"}
+            loading="lazy"
+            style={{ objectFit: "cover" }}
+          />
         ) : null}
       </ImageContainer>
       <Text font="roboto" weight="semibold" color="dark-orange">

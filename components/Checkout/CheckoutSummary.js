@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 
 //Components
-import Text from "./DesignKit/Text";
-import Button from "./DesignKit/Button";
+import Text from "../DesignKit/Text";
+import Button from "../DesignKit/Button";
 
-const CheckoutSummary = ({ cartData }) => {
+const CheckoutSummary = ({ cartData, activeTab, setActiveTab }) => {
   const cartTotal = useMemo(() => {
     return cartData.reduce((acc, curr) => {
       acc += parseInt(curr.price);
@@ -17,6 +17,9 @@ const CheckoutSummary = ({ cartData }) => {
   const estimatedTax = cartTotal ? 4 : 0;
   const total = cartTotal + shippingAndHandling + estimatedTax;
 
+  const handleCheckout = () => {
+    setActiveTab(activeTab + 1);
+  };
   return (
     <Wrapper>
       <Text font="roboto" weight="bold" size="lg">
@@ -50,7 +53,11 @@ const CheckoutSummary = ({ cartData }) => {
       <Break />
 
       <ButtonContainer>
-        <Button color="black" disabled={Boolean(total == 0)}>
+        <Button
+          color="black"
+          disabled={Boolean(total == 0)}
+          onClick={handleCheckout}
+        >
           Checkout
         </Button>
         <Button disabled={Boolean(total == 0)}>Paypal</Button>

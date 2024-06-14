@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import Text from "../DesignKit/Text";
 import UnifiedCheckoutContext from "../Context/UnifiedCheckoutContext";
+import Image from "next/image";
 
 const ShoeDetails = ({ selectedShoeData }) => {
   const { cartData, setCartData, setIsOpen } = useContext(
     UnifiedCheckoutContext
   );
-  const { title, sizes, styledId, price, material, details, color } =
+
+  const { title, sizes, imageUrl, styledId, price, material, details, color } =
     selectedShoeData || {};
 
   const addToCart = () => {
@@ -18,7 +20,16 @@ const ShoeDetails = ({ selectedShoeData }) => {
 
   return (
     <Wrapper>
-      <Image />
+      <ImageContainer>
+        <Image
+          src={imageUrl}
+          alt={title}
+          fill={true}
+          style={{ objectFit: "cover" }}
+          sizes={"(max-width: 300px) 100%"}
+          loading="lazy"
+        />
+      </ImageContainer>
       <DetailsContainer>
         <Title size="lg" font="roboto">
           {title}
@@ -101,10 +112,9 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const Image = styled.div`
+const ImageContainer = styled.div`
   max-width: 495px;
   width: 100%;
   height: 495px;
-  border: 1px solid red;
-  background: purple;
+  position: relative;
 `;
