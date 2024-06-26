@@ -1,21 +1,58 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 //Components
 import Text from "../components/DesignKit/Text";
 import ItemsList from "../components/ItemsList";
 import CheckoutSummary from "../components/Checkout/CheckoutSummary";
 import ShippingForm from "../components/Checkout/ShippingForm";
+import ConfirmationScreen from "../components/Shop/ConfirmationScreen";
 
 //State
 import UnifiedCheckoutContext from "../components/Context/UnifiedCheckoutContext";
+
+const propsToFilter = new Set(["isopen"]);
+const shouldForwardProp = (prop) => !propsToFilter.has(prop);
 
 const UnifiedCheckout = () => {
   const { isOpen, setIsOpen, cartData, setCartData } = useContext(
     UnifiedCheckoutContext
   );
 
+  const wrapperRef = useRef();
+
+  // Tab State
   const [activeTab, setActiveTab] = useState(0); // 0: review, 1: shipping details, 2: succes page?
   const [showAnimation, setShowAnimation] = useState(true);
+
+  //Payer Details State
+  const [payerDetails, setPayerDetails] = useState({
+    firstName: "",
+    lastName: "",
+    cardNumber: "",
+    expireDate: "",
+    cvv: "",
+  });
+
+  // Shipping Details State
+  const [shippingDetails, setShippingDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    country: "",
+    state: "",
+    postalCode: "",
+    address: "",
+    city: "",
+  });
+
+  const isCheckoutDetailsFilled = Boolean(
+    payerDetails.firstName &&
+      payerDetails.lastName &&
+      payerDetails.cardNumber &&
+      payerDetails.expireDate &&
+      payerDetails.cvv
+  );
 
   const handleClose = () => {
     setShowAnimation(false);
@@ -33,6 +70,7 @@ const UnifiedCheckout = () => {
   return (
     <Container isopen={isOpen}>
       <Wrapper
+        ref={wrapperRef}
         className={`animate__animated ${
           showAnimation ? "animate__fadeInRight" : "animate__fadeOutRight"
         }`}
@@ -49,12 +87,22 @@ const UnifiedCheckout = () => {
           </>
         ) : activeTab == 1 ? (
           <>
-            <ShippingForm />
+            <ShippingForm
+              payerDetails={payerDetails}
+              setPayerDetails={setPayerDetails}
+              shippingDetails={shippingDetails}
+              setShippingDetails={setShippingDetails}
+            />
             <CheckoutSummary
               cartData={cartData}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
+              isCheckoutDetailsFilled={isCheckoutDetailsFilled}
             />
+          </>
+        ) : activeTab == 2 ? (
+          <>
+            <ConfirmationScreen cartData={cartData} />
           </>
         ) : null}
       </Wrapper>
@@ -79,7 +127,7 @@ const Button = styled.button`
   z-index: 1;
   cursor: pointer;
 `;
-const Container = styled.div`
+const Container = styled.div.withConfig({ shouldForwardProp })`
   position: fixed;
   top: 0;
   bottom: 0;

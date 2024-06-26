@@ -5,7 +5,12 @@ import styled from "styled-components";
 import Text from "../DesignKit/Text";
 import Button from "../DesignKit/Button";
 
-const CheckoutSummary = ({ cartData, activeTab, setActiveTab }) => {
+const CheckoutSummary = ({
+  cartData,
+  activeTab,
+  setActiveTab,
+  isCheckoutDetailsFilled,
+}) => {
   const cartTotal = useMemo(() => {
     return cartData.reduce((acc, curr) => {
       acc += parseInt(curr.price);

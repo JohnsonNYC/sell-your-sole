@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+const propsToFilter = new Set(["fontColor"]);
+const shouldForwardProp = (prop) => !propsToFilter.has(prop);
+
 const Button = (props) => {
   const { children, color, ...rest } = props;
 
@@ -15,7 +18,7 @@ const Button = (props) => {
 
 export default Button;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.withConfig({ shouldForwardProp })`
   padding: 16px 24px;
   background: ${(props) => props.backgroundcolor || "white"};
   color: ${(props) => props.fontColor};

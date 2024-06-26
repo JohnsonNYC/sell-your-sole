@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledDiv = styled.div`
+const propsToFilter = new Set(["showPointer", "fontColor"]);
+
+const shouldForwardProp = (prop) => !propsToFilter.has(prop);
+
+const StyledDiv = styled.div.withConfig({ shouldForwardProp })`
   font-family: ${(props) => props.font}, sans-serif;
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.weight};
   color: ${(props) => props.color};
-  cursor: ${(props) => (Boolean(props.showPointer) ? "pointer" : "initial")};
+  cursor: ${(props) => (Boolean(props.showPointer) ? "pointer" : "default")};
 `;
 
 const colorMap = {
