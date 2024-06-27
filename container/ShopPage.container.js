@@ -13,7 +13,7 @@ const ShopPageContainer = () => {
       <SideFilter />
       <ShoeGrid setSelectedShoeData={setSelectedShoeData} />
       <ContentDrawer depVar={selectedShoeData} setDepVar={setSelectedShoeData}>
-        <ShoeDetails selectedShoeData={selectedShoeData} />
+        <ShoeDetails shoeData={selectedShoeData} />
       </ContentDrawer>
     </Wrapper>
   );

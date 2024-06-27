@@ -11,10 +11,10 @@ const ItemsList = ({ cartData, setCartData }) => {
         Bag
       </Text>
       {cartData && cartData.length ? (
-        cartData.map((item) => (
+        cartData.map((item, i) => (
           <ItemRow
             item={item}
-            key={item.key}
+            key={`${item.key}__${i}`}
             cartData={cartData}
             setCartData={setCartData}
           />

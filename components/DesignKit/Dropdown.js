@@ -58,7 +58,6 @@ const LabelContainer = styled.div`
 const OptionRowWrapper = styled.div`
   display: flex;
   padding: 5px;
-  border: 1px solid red;
 `;
 
 const Wrapper = styled.div`

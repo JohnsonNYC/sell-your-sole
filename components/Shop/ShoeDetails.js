@@ -1,21 +1,29 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Text from "../DesignKit/Text";
 import UnifiedCheckoutContext from "../Context/UnifiedCheckoutContext";
 import Image from "next/image";
 
-const ShoeDetails = ({ selectedShoeData }) => {
-  const { cartData, setCartData, setIsOpen } = useContext(
-    UnifiedCheckoutContext
-  );
+const ShoeDetails = ({ shoeData }) => {
+  const { cartData, setCartData } = useContext(UnifiedCheckoutContext);
+  const { title, sizes, imageUrl, details } = shoeData || {};
 
-  const { title, sizes, imageUrl, styledId, price, material, details, color } =
-    selectedShoeData || {};
+  const [success, setSuccess] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
 
   const addToCart = () => {
-    let newData = [...cartData];
-    newData.push(selectedShoeData);
-    setCartData(newData);
+    let shoeDataCopy = { ...shoeData };
+    delete shoeDataCopy.sizes;
+    shoeDataCopy["size"] = selectedSize;
+
+    setCartData([...cartData, shoeDataCopy]);
+
+    setSuccess(true);
+
+    setTimeout(() => {
+      setSuccess(false);
+      setSelectedSize("");
+    }, 3000);
   };
 
   return (
@@ -34,21 +42,33 @@ const ShoeDetails = ({ selectedShoeData }) => {
         <Title size="lg" font="roboto">
           {title}
         </Title>
-        {sizes && sizes.length ? (
-          <Text font="roboto" size="lg">
-            {sizes.join(" / ")}
-          </Text>
-        ) : null}
+        <SizeContainer>
+          {sizes && sizes.length
+            ? sizes.map((size, i) => (
+                <ButtonPill
+                  key={`size_${i}`}
+                  font="roboto"
+                  size="lg"
+                  color={size == selectedSize ? "black" : "grey"}
+                  onClick={() => setSelectedSize(size)}
+                >
+                  {size}
+                </ButtonPill>
+              ))
+            : null}
+        </SizeContainer>
 
-        <Button onClick={addToCart}>$100.00 / ADD TO CART</Button>
+        <Button onClick={addToCart} disabled={!selectedSize || success}>
+          {success ? `ADDED TO CART` : `$100.00 / ADD TO CART`}
+        </Button>
 
         {details && details.length ? (
           <ListContainer>
             <Text font="roboto" weight="medium">
               DETAILS
             </Text>
-            {details.map((text) => (
-              <li>
+            {details.map((text, i) => (
+              <li key={`detail_${i}`}>
                 <Text font="roboto" weight="medium">
                   {text}
                 </Text>
@@ -73,6 +93,13 @@ const ShoeDetails = ({ selectedShoeData }) => {
 
 export default ShoeDetails;
 
+const SizeContainer = styled.div`
+  display: flex;
+  & > button {
+    margin-right: 10px;
+  }
+`;
+
 const Button = styled.button`
   border-radius: 20px;
   padding: 10px;
@@ -84,10 +111,28 @@ const Button = styled.button`
   margin-top: 20px;
   margin-bottom: 10px;
 
-  &:hover {
+  &:enabled:hover {
     border: 1px solid #8373dc;
     background: #8373dc;
     cursor: pointer;
+  }
+`;
+
+const ButtonPill = styled.button.attrs((props) => ({
+  style: {
+    color: props.color,
+    border: `1px solid ${props.color}`,
+  },
+}))`
+  border-radius: 10px;
+  width: fit-content;
+  height: auto;
+  background: none;
+  font-size: 20px;
+
+  &:hover {
+    cursor: pointer;
+    color: black;
   }
 `;
 
