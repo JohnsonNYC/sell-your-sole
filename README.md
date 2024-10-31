@@ -13,7 +13,7 @@ With the design, I wanted to go against the grain from what you usually see. As 
 3. One of the soft challenges I had was hosting the image urls to an S3 bucket (becuase I had never personally done it).
 4. Some files may use Typescript. Seems like the industry is moving in this direction and I'd like to hone my new skills here. 
 
-Nice to Haves
+Nice to Haves / On Going Features
 1. User should be able to pick a sneaker in a different colors
 2. Creat a login/sign up page
 3. Connect postgresql backend to frontend
